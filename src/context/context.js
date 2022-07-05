@@ -1,36 +1,58 @@
 import axios from "axios";
-import { Children, createContext, useEffect, useState } from "react";
+import { children, createContext, useEffect, useState } from "react";
+
 
 const DataContext= createContext({});
 
+const baseURL = 'https://fakestoreapi.com/products'
 
-export const DataProvider = ({ Children}) => {
-    const [product, setProduct] = useState();
-    const [Loading, setLoading] = useState();
-    const [errors, setErrors] = useState();
+  export const DataProvider = ({ children }) => {
+       const [products, setProducts] = useState([]);
+       const [darkMode, setDarkMode] = useState(false)   // for dark theme
+       // console.log(darkMode)
+      const [cart, setCart] = useState([]);
 
-    const baseURL = 'https://fakestoreapi.com/products';
 
+      const fetch = () => {
+             axios.get(baseURL).then(res => {  // fetching data from api
+            //  console.log(res)
+            setProducts(res)   // setting up state
+        })
+    }        
+       useEffect(() => {
+           fetch()     //fetch function is called here, 
+       }, [products])     
 
-        
-        const fetchData=()=> axios.get(baseURL).then(
-            Response => (
-                setProduct(JSON.stringify(Response.data))),
-            // console.log(product)
-        )
-
-    useEffect(() => {      fetchData()
-        //console.log(product)
-
-    },[product])
-
-    return (
-        <DataContext.Provider value={{product} }>
-            {Children}
-        </DataContext.Provider>
+      const addCart = (id) => {
+          if (products && products.products && products.products.data && products.products.data.length > 0) {
+              const data = products.products.data.filter((prods) => (prods.id).toString() === id);
+              console.log(data)
+          }
+      }
+      return (
+           <DataContext.Provider value={{ products, darkMode, setDarkMode,addCart }}>
+            {children}
+           </DataContext.Provider>  // passign the data through provider
     )
-}
+  }
+
 
 export default DataContext;
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

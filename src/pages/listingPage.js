@@ -1,15 +1,21 @@
-import React from 'react'
-import ProductCard from '../components/productCard.js/productCard'
+import React, { useContext } from 'react'
+import ProductCard from '../components/productCard/productCard'
 import DataContext from '../context/context'
-import { DataProvider } from '../context/context'
 
 const ListingPage = () => {
-  const { product } = DataProvider(DataContext)
-    console.log("listing", product)
+  const {products} = useContext(DataContext)       // products array rxcvd
+  // console.log("listing", products)
 
   return (
-    <div>ListingPage
-      <ProductCard />
+    <div>          
+      {/* checking for data rcvd or not if not loader will work else it will render */}
+      {products && (!products.data || products.data.length <= 0) ?
+        "loading..." : products && products.data && products.data.length > 0
+        && products.data.map((prod) => {
+          return (
+            <ProductCard key={prod.id} prod={prod} />       //card componet data passed as prop
+          )
+        })}
     </div>
   )
 }

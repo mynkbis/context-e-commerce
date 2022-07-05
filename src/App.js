@@ -7,13 +7,17 @@ import Navbar from './components/navbar/navbar';
 import Cart from './components/cart/cart';
 import SingleProductPage from './pages/singleProduct';
 import { Route, Routes } from 'react-router-dom';
-import { DataProvider } from './context/context';
-
+import DataContext, { DataProvider } from './context/context';
+import { useContext } from 'react';
 
 function App() {
+
+  const darkMode = useContext(DataContext)
+  console.log("theme",darkMode)
   return (
     <div className="App">
-
+      <DataProvider>
+       
        <Navbar/>
       <div className='container'>
      
@@ -28,7 +32,9 @@ function App() {
         
           </Routes>
          
-        </div>
+          </div>
+     
+        </DataProvider>
       </div>
   );
 }
