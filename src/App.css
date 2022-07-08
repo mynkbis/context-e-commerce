@@ -1,3 +1,35 @@
 .App {
   text-align: center;
 }
+
+.light {
+  background-color: none;
+
+}
+
+.dark {
+  background-color: rgba(0, 0, 0, 0.815);
+  color: #eee;
+  box-shadow: 2px 2px 20px rgb(187, 179, 179);
+  height: 100%;
+}
+
+.singleproduct {
+  width: 500px;
+  padding: 5px;
+  height: 500px;
+  border: 2px solid red;
+
+}
+
+.countValues {
+  border: 2px solid #eee;
+  width: 80px;
+  height: 20px;
+  margin: 10px;
+
+}
+
+.countValues>span {
+  padding: 10px;
+}

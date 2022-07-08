@@ -9,3 +9,14 @@
 
 
 }
+
+#light {
+    background-color: none;
+
+}
+
+#dark {
+    background-color: rgba(0, 0, 0, 0.815);
+    color: #eee;
+    box-shadow: 20px 20px 20px rgb(141, 125, 125);
+}
