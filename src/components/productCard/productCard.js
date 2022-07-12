@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { useNavigate} from 'react-router-dom'
 import DataContext from '../../context/context';
+
 import './productCard.css'
 
 const ProductCard = ({ prod }) => {
   const navigate = useNavigate();
-const {addCart}=useContext(DataContext)
+const {addCart, show}=useContext(DataContext)
 
   const handleImageClick = (prodId) => {  // once the image is clicked it will navigate to the singlepage or pdp
     navigate(`/listing/${prodId}`)
@@ -21,11 +22,12 @@ const {addCart}=useContext(DataContext)
                 </div>
                 <h5>$: {prod.price}</h5>
                 <p>Category: {prod.category}</p>
-                <div>
-                  <button onClick={()=>addCart(prod.id)}>Add to cart</button>
-                </div>
+              <div>               
+                <button onClick={() => addCart(prod.id)}>Add to Cart</button>
+              </div>
+               {/* <CartValue/> */}
             </div>
-                      }
+            }
       </div>
   )
 }

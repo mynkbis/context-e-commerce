@@ -13,7 +13,7 @@ const ListingPage = () => {
         "loading..." : products && products.data && products.data.length > 0
         && products.data.map((prod) => {
           return (
-            <ProductCard key={prod.id} prod={prod} />       //card componet data passed as prop
+            <ProductCard key={prod.id} prod={prod} />   //card component data passed as prop
           )
         })}
     </div>

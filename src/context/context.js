@@ -1,65 +1,79 @@
 import axios from "axios";
-import { children, createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
+import { CartReducer } from "./reducer";
 
 
 const DataContext= createContext({});
 
+
 const baseURL = 'https://fakestoreapi.com/products'
 
-  export const DataProvider = ({ children }) => {
-       const [products, setProducts] = useState([]);
-    const [darkMode, setDarkMode] = useState(false)
-    const[color,setColor]=useState("Light")  
-       // for dark theme
-       // console.log(darkMode)
-      const [cart, setCart] = useState({})
-         
+export const DataProvider = ({ children }) => {
+  
+  const [state, dispatch] = useReducer(CartReducer, {
+    products: [],
+    cart:[]
+  })
 
-    const handleTheme = () => {
-    
-      setDarkMode(!darkMode);
-      
-      setColor(darkMode ? "Light" : "Dark")
-       
+  const [products, setProducts] = useState([]);
+  const [darkMode, setDarkMode] = useState(false)
+  const [color, setColor] = useState("Light")  // for dark theme
+  // console.log(darkMode)
+  const [cart, setCart] = useState({})
+  const [show, setShow] = useState(false)
+
+
+  const handleTheme = () => {
+    setDarkMode(!darkMode);
+    setColor(darkMode ? "Light" : "Dark")      
         // console.log("changed theme dark", darkMode)
-    }
+  }
+  
 
-      const fetch = () => {
-             axios.get(baseURL).then(res => {  // fetching data from api
-            //  console.log(res)
-            setProducts(res)   // setting up state
-        })
-    }        
-       useEffect(() => {
-           fetch()
-             //fetch function is called here,
-       }, [products])     
+   // fetching data from api
+  const fetch = () => {
+    axios.get(baseURL).then(res => {
+      //  console.log(res)
+      setProducts(res)   // setting up state
+    })
+  }
+  
+ //fetch function is called here,
+  useEffect(() => {
+    fetch()
+  }, [products])
 
-      const addCart = (id) => {
-        //   console.log("from add", id)
-        //   console.log("main products", products)
-    
-              const prodinfo = products.data.filter((prodfilter) => (prodfilter.id) === id)
-            //   console.log(prodinfo)
-        
-              let cartInitial = JSON.parse(localStorage.setItem("cart", JSON.stringify(prodinfo)))
-        
-              if (!cartInitial) {
-                  const initState = JSON.stringify({ Total: 0, Item: 0 })
-                  cartInitial = initState;
-                  localStorage.setItem("cart", initState)
-              } else {
-                  JSON.parse(localStorage.setItem("cart", JSON.stringify(prodinfo)))
-              }
-          }
-      
+
+  // add to cart logic
+  const addCart = (id) => {
+    setShow(true)
+    const dataStore = products;
+    // console.log(id)
+    // console.log(dataStore)
+    const check = dataStore.data.every((val) => {
+      return (val.id !== id)
+    })
+    //  console.log(check)
+      if (!check) {
+        const prodinfo = products.data.filter((prodfilter) => { return (prodfilter.id) === id })
+        // localStorage.setItem("cart", JSON.stringify(prodinfo))
+        setCart(prodinfo);
+        return (
+          //  console.log( prodinfo)
+          prodinfo
+        )
+      } else {
+        alert("somthing gone wrong")
+      }      
+    }   
+       
+       
       return (
-           <DataContext.Provider value={{ products, darkMode, addCart, cart, setCart,color, handleTheme }}>
+           <DataContext.Provider value={{ products, darkMode, addCart, cart,show, setCart,color, state, dispatch, handleTheme }}>
             {children}
            </DataContext.Provider>  // passign the data through provider
     )
   }
-
 
 export default DataContext;
 

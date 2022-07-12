@@ -10,23 +10,27 @@ import Navbar from './components/navbar/navbar';
 import Cart from './components/cart/cart';
 import SingleProductPage from './pages/singleProduct';
 import { Route, Routes } from 'react-router-dom';
+import CheckOutPage from './pages/checkOutPage';
+
+import StripeContainer from './components/payment/stripeContainer';
 
 function App() {
   const { darkMode } = useContext(DataContext);
-  console.log(darkMode)
+  // console.log(darkMode)
     return (
-    <div className="App"id={darkMode ? "dark" : "light"}>
+    <div className="App" id={darkMode ? "dark" : "light"}>
       <DataProvider>
        <Navbar/>
       <div className='container'>
-     
-        <Routes>
+           <Routes>
             <Route exact path='/home' element={<Home />} />
             <Route path='/' element={<Home />} />
             <Route exact path='/listing' element={<ListingPage />}></Route>         
             <Route exact path='/listing/:id' element={<SingleProductPage />}/>  
             <Route path='*' element={<Error />} />
-            <Route path='/cart' element={<Cart/>} />
+              <Route path='/cart' element={<Cart />} />
+              <Route exact path='/checkout' element={<CheckOutPage />} />
+                 <Route exact path='/payment' element={<StripeContainer/>}/>
         
           </Routes>
          

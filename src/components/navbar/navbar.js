@@ -4,15 +4,19 @@ import './navbar.css'
 import ThemeButton from '../themeButton/themeButton'
 import DataContext from '../../context/context'
 
-const Navbar = () => {
 
-  const { darkMode } = useContext(DataContext);
+const Navbar = () => {
+  const{darkMode,state:{cart}}=useContext(DataContext);
+
   return (
     <div >
       <div className='navbar' id={darkMode ? "dark" : "light"}>
       <Link style={{color: 'white', textDecoration:"none"}}  to='/home'>Home</Link>
         <Link style={{color: 'white', textDecoration:"none"}} to='./About'>About</Link>
-        <Link style={{ color: 'white', textDecoration: "none" }} to='/cart'>Cart 0</Link>
+        <Link style={{ color: 'white', textDecoration: "none" }} to='/cart'>cart({cart.length})</Link>
+        {/* {cart.length > 0 ? (<>{cart.map((prod => { return(
+          <img src={ prod.image} alt={prod.title } />)
+        }))}</>) : (<span>Cart is empty</span>)} */}
         <ThemeButton/>
         </div>
     </div>

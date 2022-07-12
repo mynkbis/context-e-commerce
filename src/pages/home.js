@@ -5,14 +5,12 @@ import '../App.css'
 const Home = () => {
 
   const { darkMode } = useContext(DataContext);
-
 // console.log("from home", darkMode)
-
-
   return (
     <div className={darkMode ? "dark" : "light"} >Home
       <ListingPage />
       </div>
   )
 }
+
 export default Home
