@@ -6,7 +6,7 @@ import DataContext from '../../context/context'
 
 
 const Navbar = () => {
-  const{darkMode,state:{cart}}=useContext(DataContext);
+  const{darkMode,state:{cart}, cart1}=useContext(DataContext);
 
   return (
     <div >

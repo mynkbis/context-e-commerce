@@ -19,7 +19,7 @@ export const DataProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false)
   const [color, setColor] = useState("Light")  // for dark theme
   // console.log(darkMode)
-  const [cart, setCart] = useState({})
+  const [cart1, setCart1] = useState({})
   const [show, setShow] = useState(false)
 
 
@@ -46,18 +46,21 @@ export const DataProvider = ({ children }) => {
 
   // add to cart logic
   const addCart = (id) => {
+    // console.log("butto add to cart is pressed")
     setShow(true)
     const dataStore = products;
-    // console.log(id)
+    console.log("pressed id",id)
     // console.log(dataStore)
-    const check = dataStore.data.every((val) => {
-      return (val.id !== id)
+    const check = dataStore.data.every((val) => { 
+      return (
+        console.log("mehtod id",val.id),
+        val.id !== id)
     })
-    //  console.log(check)
+     console.log("check value",check)
       if (!check) {
         const prodinfo = products.data.filter((prodfilter) => { return (prodfilter.id) === id })
         // localStorage.setItem("cart", JSON.stringify(prodinfo))
-        setCart(prodinfo);
+        setCart1(prodinfo);
         return (
           //  console.log( prodinfo)
           prodinfo
@@ -69,7 +72,7 @@ export const DataProvider = ({ children }) => {
        
        
       return (
-           <DataContext.Provider value={{ products, darkMode, addCart, cart,show, setCart,color, state, dispatch, handleTheme }}>
+           <DataContext.Provider value={{ products, darkMode, addCart, cart1,show, setCart1,color, state, dispatch, handleTheme }}>
             {children}
            </DataContext.Provider>  // passign the data through provider
     )

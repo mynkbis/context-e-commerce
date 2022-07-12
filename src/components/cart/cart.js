@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Cart = () => {
-  const { darkMode, state: { cart }, dispatch } = useContext(DataContext);
+  const { darkMode, state: { cart }, dispatch,cart1 } = useContext(DataContext);
   
   const [total, setTotal] = useState(); 
   const navigate = useNavigate();
@@ -26,7 +26,12 @@ const Cart = () => {
       <div id={darkMode ? "dark" : "light"} style={{ height: "100vh" }}>
         <div id={darkMode ? "dark" : "light"}>
           My orders
-      </div>     
+        </div>     
+        {/* <div>{cart1 && cart1.map((it) => {
+          return (
+            <><h1>{it.title }</h1></>
+          )
+        })}</div> */}
       <div style={{border: "2px solid red", display: "flex", maxWidth:"200vw"}}>
           {cart && cart.map((item) => {
         

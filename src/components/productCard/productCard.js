@@ -6,7 +6,7 @@ import './productCard.css'
 
 const ProductCard = ({ prod }) => {
   const navigate = useNavigate();
-const {addCart, show}=useContext(DataContext)
+const {addCart}=useContext(DataContext)
 
   const handleImageClick = (prodId) => {  // once the image is clicked it will navigate to the singlepage or pdp
     navigate(`/listing/${prodId}`)

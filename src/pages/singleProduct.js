@@ -10,7 +10,7 @@ const SingleProductPage = () => {
   const [prod, setProd] = useState([]);  // setting up state so that we can use data and render it which we recx data from context
   // console.log(id)
   const products = useContext(DataContext)
-  const { state: { cart }, dispatch, } = useContext(DataContext);
+  const { cart1,addCart, state:{cart},dispatch} = useContext(DataContext);
   // console.log("from single page", products)
   const { darkMode} = useContext(DataContext)
   
@@ -25,9 +25,11 @@ const SingleProductPage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+
  return (
   <div id={darkMode ? "dark" : "light"} style={{height:"100vh "}} >
      single page
+   
      <div className='singleproduct'>
        <div>{prod.title}
          <div>
@@ -50,12 +52,28 @@ const SingleProductPage = () => {
              payload:prod,
            })
            }}>
-            Add</button>)} 
+             Add</button>)} 
+         <div>
+           <button onClick={() => {
+           dispatch({
+             type: "removeFromCart",
+             payload: prod.id
+           })
+           }}>-</button>
+           <span>{cart.length }</span>
+           <button onClick={() => {
+           dispatch({
+             type: "addToCart",
+             payload: prod
+           })
+           }}>+</button>
+         </div>
          <div>
          </div>
          {/* <CartValue /> */}
        </div>
-     </div>
+       </div>
+      
    </div>
   )
 }
