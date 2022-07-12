@@ -40,20 +40,7 @@ const SingleProductPage = () => {
          <div>Description: {prod.description}
          </div>
          {cart.some((p) => p.id === prod.id) ?
-           (<button onClick={() => {
-           dispatch({
-             type: "removeFromCart",
-             payload: prod.id
-           })
-           }}>Remove</button>)
-           : (<button onClick={() => {
-           dispatch({
-             type: 'addToCart',
-             payload:prod,
-           })
-           }}>
-             Add</button>)} 
-         <div>
+           (<div>
            <button onClick={() => {
            dispatch({
              type: "removeFromCart",
@@ -67,7 +54,15 @@ const SingleProductPage = () => {
              payload: prod
            })
            }}>+</button>
-         </div>
+         </div>)
+           : (<button onClick={() => {
+           dispatch({
+             type: 'addToCart',
+             payload:prod,
+           })
+           }}>
+             Add</button>)} 
+         
          <div>
          </div>
          {/* <CartValue /> */}

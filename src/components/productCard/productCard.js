@@ -6,7 +6,7 @@ import './productCard.css'
 
 const ProductCard = ({ prod }) => {
   const navigate = useNavigate();
-const {addCart}=useContext(DataContext)
+const { cart1,addCart, state:{cart},dispatch} = useContext(DataContext)
 
   const handleImageClick = (prodId) => {  // once the image is clicked it will navigate to the singlepage or pdp
     navigate(`/listing/${prodId}`)
@@ -23,7 +23,35 @@ const {addCart}=useContext(DataContext)
                 <h5>$: {prod.price}</h5>
                 <p>Category: {prod.category}</p>
               <div>               
-                <button onClick={() => addCart(prod.id)}>Add to Cart</button>
+                {cart.some((p) => p.id === prod.id) ?
+                  (
+                     <div>
+           <button onClick={() => {
+           dispatch({
+             type: "removeFromCart",
+             payload: prod.id
+           })
+           }}>-</button>
+           <span>{cart.length }</span>
+           <button onClick={() => {
+           dispatch({
+             type: "addToCart",
+             payload: prod
+           })
+           }}>+</button>
+         </div>)
+           : (<button onClick={() => {
+           dispatch({
+             type: 'addToCart',
+             payload:prod,
+           })
+           }}>
+             Add</button>)} 
+
+
+
+{/* 
+                <button onClick={() => addCart(prod.id)}>Add to Cart</button> */}
               </div>
                {/* <CartValue/> */}
             </div>
