@@ -27,19 +27,14 @@ const Cart = () => {
         <div id={darkMode ? "dark" : "light"}>
           My orders
         </div>     
-        {/* <div>{cart1 && cart1.map((it) => {
-          return (
-            <><h1>{it.title }</h1></>
-          )
-        })}</div> */}
-      <div style={{border: "2px solid red", display: "flex", maxWidth:"200vw"}}>
+            <div style={{border: "2px solid red", display: "flex", maxWidth:"200vw"}}>
           {cart && cart.map((item) => {
         
         return (
           <div>
             <div style={{ border: "2px solid #eee", margin: "5px", }}>
-              <div>{item.title.substring(0, 18)}</div>
-              <div><img src={item.image} alt={item.title.substring(0, 18)} style={{ width: "150px", height: "150px" }} /></div>
+              <div>{item.title}</div>
+              <div><img src={item.image} alt={item.title} style={{ width: "150px", height: "150px" }} /></div>
               <div>{item.category}</div>
               <div>${item.price}</div>
               <div>

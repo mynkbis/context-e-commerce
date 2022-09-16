@@ -10,7 +10,7 @@ const SingleProductPage = () => {
   const [prod, setProd] = useState([]);  // setting up state so that we can use data and render it which we recx data from context
   // console.log(id)
   const products = useContext(DataContext)
-  const { cart1,addCart, state:{cart},dispatch} = useContext(DataContext);
+  const { state:{cart},dispatch} = useContext(DataContext);
   // console.log("from single page", products)
   const { darkMode} = useContext(DataContext)
   

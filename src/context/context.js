@@ -12,7 +12,7 @@ export const DataProvider = ({ children }) => {
   
   const [state, dispatch] = useReducer(CartReducer, {
     products: [],
-    cart:[]
+     cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [], 
   })
 
   const [products, setProducts] = useState([]);
